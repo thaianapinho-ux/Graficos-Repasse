@@ -167,6 +167,10 @@ canais = {
     'VAREJO': ['varejo-ttc pre', 'varejo-promo pre', 'varejo-%promo pre', 'varejo-ttc pos', 'varejo-promo pos', 'varejo-%promo pos', 'varejo-delta ttc'],
     'ATACADO': ['atacado-ttc pre', 'atacado-desin pre', 'atacado-ttc pos', 'atacado-desin pos', 'atacado-delta ttc'],
 }
+
+resumo_canais = repasse.clone()
+resumo_canais = resumo_canais[['uf', 'geo', 'sku', 'rota-ttv pos', 'asr-ttv pos', 'varejo-ttc pos', 'atacado-ttc pos']]
+resumo_canais.columns = ['UF', 'Geo', 'SKU', 'ROTA', "ASR", "VAREJO", "ATACADO"]
     
 repasse = repasse.filter(pl.col('uf') == st.session_state['uf'])
 #repasse = repasse.filter(pl.col('grupo').is_in(grupo_dict.get(grupo_select)))
@@ -178,6 +182,13 @@ graph = alt.vconcat(*graphs)
 
 st.altair_chart(graph)
 
-st.dataframe(repasse.drop(['emb.', 'qtd cx', 'nome_slide', 'grupo', 'nome', 'marca', 'caminho'], axis=1), width=1000, height=2520)
+tab1, tab2 = st.columns(2)
+
+with tab1:
+    st.dataframe(repasse.drop(['emb.', 'qtd cx', 'nome_slide', 'grupo', 'nome', 'marca', 'caminho'], axis=1), use_container_width=True, height=2520)
+    
+with tab2:
+    
+    st.dataframe(resumo_canais.to_pandas(), use_container_width=True, height=2520)
 
 
