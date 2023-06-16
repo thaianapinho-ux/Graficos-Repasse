@@ -15,7 +15,7 @@ def convert_image(str):
     image = PILImage.open(str)
     output = io.BytesIO()    
     image.save(output, format='PNG')
-    encoded_string = "data:image/jpeg;base64,"+base64.b64encode(output.getvalue()).decode()
+    encoded_string = "data:image/png;base64,"+base64.b64encode(output.getvalue()).decode()
     return encoded_string
     
 def make_text(df, texto: str, fonte, offset, x, y, color_param = 'black', f_weight = 'normal'):
@@ -47,7 +47,6 @@ def make_text(df, texto: str, fonte, offset, x, y, color_param = 'black', f_weig
     return text_chart
 
 def make_graph_repasse(df: pd.DataFrame, h_chart, w_chart, h_pic, w_pic, canal):
-        
     match canal:
         case 'BAR':
             y = 'rota-ttv pos'
