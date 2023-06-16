@@ -54,14 +54,14 @@ def make_graph_repasse(df: pd.DataFrame, h_chart, w_chart, h_pic, w_pic, canal):
             df['line2'] = 'TTV Pré: R$ ' + df['rota-ttv pre'].round(2).map('{:,.2f}'.format).astype(str)
             df['line3'] = 'TTV Pós: R$ ' + df['rota-ttv pos'].round(2).map('{:,.2f}'.format).astype(str)
             df['line_delta'] = 'Delta TTV: R$ ' + df['rota-delta ttv'].round(2).map('{:,.2f}'.format).astype(str)
-            df['line4'] = 'TTC CX Pós: R$ ' + df['rota-ttc pos'].round(2).map('{:,.2f}'.format).astype(str)
+            df['line4'] = 'TTC Pós: R$ ' + df['rota-ttc pos'].round(2).map('{:,.2f}'.format).astype(str)
         case 'ASR':
             y = 'asr-ttv pos'
             df['line1'] = df['nome_slide']
             df['line2'] = 'TTV Pré: R$ ' + df['asr-ttv pre'].round(2).map('{:,.2f}'.format).astype(str)
             df['line3'] = 'TTV Pós: R$ ' + df['asr-ttv pos'].round(2).map('{:,.2f}'.format).astype(str)
             df['line_delta'] = 'Delta TTV: R$ ' + df['asr-delta ttv'].round(2).map('{:,.2f}'.format).astype(str)
-            df['line4'] = 'TTC CX Pós: R$ ' + df['asr-ttc pos'].round(2).map('{:,.2f}'.format).astype(str)
+            df['line4'] = 'TTC Pós: R$ ' + df['asr-ttc pos'].round(2).map('{:,.2f}'.format).astype(str)
         case 'VAREJO':
             y = 'varejo-ttc pos'
             df['line1'] = df['nome_slide']
