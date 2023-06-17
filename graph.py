@@ -70,7 +70,7 @@ def make_graph_repasse(df: pd.DataFrame, h_chart, w_chart, h_pic, w_pic, canal):
             df['line_delta'] = 'Delta TTC: R$ ' + df['varejo-delta ttc'].round(2).map('{:,.2f}'.format).astype(str)
             df['line4'] = 'Promo'
             df['line5'] = 'Pré: R$ ' + df['varejo-promo pre'].astype(str) + ' | ' + df['varejo-%promo pre'].map('{:,.1%}'.format).astype(str)
-            df['line6'] = 'Pré: R$ ' + df['varejo-promo pos'].astype(str) + ' | ' + df['varejo-%promo pos'].map('{:,.1%}'.format).astype(str)
+            df['line6'] = 'Pós: R$ ' + df['varejo-promo pos'].astype(str) + ' | ' + df['varejo-%promo pos'].map('{:,.1%}'.format).astype(str)
         case 'ATACADO':
             y = 'atacado-ttc pos'
             df['line1'] = df['nome_slide']
