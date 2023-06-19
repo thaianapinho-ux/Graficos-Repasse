@@ -143,7 +143,7 @@ repasse = repasse.join(depara_repasse, left_on='SKU', right_on = 'SKU')
 repasse.columns = [x.lower() for x in repasse.columns]
 
 st.set_page_config(
-    page_title="Ações Cora", page_icon="📖", initial_sidebar_state="expanded", layout='wide'
+    page_title="PINC NAB - Jul/23", page_icon="📈", initial_sidebar_state="expanded", layout='wide'
 )
 
 col1, col2, col3, col4, col5 = st.columns(5)
