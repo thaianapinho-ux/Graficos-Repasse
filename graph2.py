@@ -111,6 +111,7 @@ def make_graph_repasse(df, h_chart, w_chart, h_pic, w_pic, x, y, canal):
     return (chart + text1 + text2 + text3 + text4 + tick)
 
 repasse = pl.read_parquet('data/repasse/repasse.parquet')
+
 depara_repasse = pl.read_parquet('data/repasse/depara_repasse.parquet')
 
 print(repasse.columns)
