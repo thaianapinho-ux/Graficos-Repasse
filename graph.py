@@ -7,6 +7,8 @@ from functions import *
 import pandas as pd
 import polars as pl
 
+from pandas.api.types import is_numeric_dtype
+
 from PIL import Image as PILImage
 import io
 import base64
@@ -184,10 +186,22 @@ st.altair_chart(graph)
 tab1, tab2 = st.columns(2)
 
 with tab1:
-    st.dataframe(repasse.drop(['emb.', 'qtd cx', 'nome_slide', 'grupo', 'nome', 'marca', 'caminho'], axis=1), use_container_width=True, height=2520)
+    st.dataframe(
+        repasse.drop(['emb.', 'qtd cx', 'nome_slide', 'grupo', 'nome', 'marca', 'caminho'], axis=1),
+        hide_index=True,
+        column_config={s: st.column_config.NumberColumn(s.split('-')[-1].upper(), format='R$ %.2f')
+                       for s in repasse.columns if is_numeric_dtype(repasse[s])},
+        use_container_width=True, height=2000)
     
 with tab2:
-    
-    st.dataframe(resumo_canais.to_pandas(), use_container_width=True, height=2520)
+    st.dataframe(resumo_canais.filter(pl.col('UF') == st.session_state['uf']).to_pandas(), hide_index=True,
+                 column_config={
+                     'UF': 'Estado',
+                     'ROTA': st.column_config.NumberColumn('Rota', format='R$ %2f', ),
+                     'ASR': st.column_config.NumberColumn('ASR', format='R$ %2f', ),
+                     'VAREJO': st.column_config.NumberColumn('Varejo', format='R$ %2f', ),
+                     'ATACADO': st.column_config.NumberColumn('Atacado', format='R$ %2f', ),
+                     },
+                 use_container_width=True, height=2000)
 
 
