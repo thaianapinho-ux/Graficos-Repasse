@@ -91,7 +91,6 @@ def make_graph_repasse(df: pd.DataFrame, h_chart, w_chart, h_pic, w_pic, canal):
     
     chart = alt.Chart(df).mark_image(
     height=h_pic,
-    width=w_pic,
     baseline='bottom').encode(
         x=alt.X(f'nome_sorted:N', axis=alt.Axis(labels=False, title='')),
         y=alt.Y(f'{y}:Q', axis=alt.Axis(labels=False, grid=False, title=''), scale=alt.Scale(domain=[y_min-0.5,y_max+0.5])),
