@@ -146,6 +146,15 @@ st.set_page_config(
     page_title="PINC NAB - Jul/23", page_icon="📈", initial_sidebar_state="expanded", layout='wide'
 )
 
+reduce_header_height_style = """
+    <style>
+        div.block-container {padding-top:1rem;}
+    </style>
+"""
+st.markdown(reduce_header_height_style, unsafe_allow_html=True)
+
+st.header('Resumo Repasse - Jul/23')
+
 col1, col2, col3, col4, col5 = st.columns(5)
 
 grupo_dict = {'Single': ['Single', 'Premium'],
@@ -176,7 +185,7 @@ repasse = repasse.filter(pl.col('uf') == st.session_state['uf'])
 repasse = repasse.select(comum + canais.get(st.session_state['canal'])).to_pandas()
 
 graphs = [
-    make_graph_repasse(repasse[repasse['grupo'] == grupo], 300, 1600, 120, 75, canal) 
+    make_graph_repasse(repasse[repasse['grupo'] == grupo], 250, 1600, 120, 75, canal) 
     for grupo in grupo_dict.get(grupo_select)]
 
 graph = alt.vconcat(*graphs)
