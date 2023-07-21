@@ -13,8 +13,8 @@ from PIL import Image as PILImage
 import io
 import base64
 
-def convert_image(str):
-    image = PILImage.open(str)
+def convert_image(string: str) -> str:
+    image = PILImage.open(string)
     output = io.BytesIO()    
     image.save(output, format='PNG')
     encoded_string = "data:image/png;base64,"+base64.b64encode(output.getvalue()).decode()
