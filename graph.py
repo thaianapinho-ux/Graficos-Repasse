@@ -133,7 +133,7 @@ if check_for_new_file('data/repasse/graficos.xlsx', 'data/repasse/*.parquet'):
 
 repasse = pl.read_parquet('data/repasse/repasse.parquet')
 
-depara_repasse = pl.read_parquet('data/repasse/depara_repasse.parquet')
+depara_repasse = pl.read_parquet('data/repasse/depara_repasse2.parquet')
 
 repasse = repasse.join(depara_repasse, left_on='SKU', right_on = 'SKU')
 
