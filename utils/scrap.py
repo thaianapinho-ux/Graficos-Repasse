@@ -4,7 +4,7 @@ import pandas as pd
 
 frames = []
 
-url = f'https://www.catalogoambev.com.br/site'
+url = 'https://www.catalogoambev.com.br/site'
 
 r = requests.get(url)
 

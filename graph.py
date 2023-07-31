@@ -94,7 +94,7 @@ def make_graph_repasse(df: pd.DataFrame, h_chart, w_chart, h_pic, w_pic, canal):
     chart = alt.Chart(df).mark_image(
     height=h_pic,
     baseline='bottom').encode(
-        x=alt.X(f'nome_sorted:N', axis=alt.Axis(labels=False, title='')),
+        x=alt.X('nome_sorted:N', axis=alt.Axis(labels=False, title='')),
         y=alt.Y(f'{y}:Q', axis=alt.Axis(labels=False, grid=False, title=''), scale=alt.Scale(domain=[y_min-0.5,y_max+0.5])),
         url='caminho').properties(
             height = h_chart,
@@ -110,23 +110,20 @@ def make_graph_repasse(df: pd.DataFrame, h_chart, w_chart, h_pic, w_pic, canal):
         thickness=2,
         size = w_chart/len(df['nome_sorted'].unique()) - 50  # controls width of tick.
     ).encode(
-        x=f'nome_sorted',
+        x='nome_sorted',
         y=alt.Y(y, axis=alt.Axis(labels=False))
     )
     
     lines = ['bold'] + ['normal']*len([x for x in df.columns if x.startswith('line')])
     
-    text = [
+    texts = [
         make_text(df, name, font_size, tick_offset + font_size*(i+1), 'nome_sorted', y, f_weight=lines[i])
         for i, name in enumerate(
             [x for x in df.columns if x.startswith('line')]
             )
         ]
-    #text3 = make_text(df, 'text3', font_size, tick_offset + font_size * 3, x, y)
-    #text4 = make_text(df[df['TTC PÓS'] <= df['TTC PRÉ']], 'text4', font_size, tick_offset + font_size * 4, x, y, 'green')
-    #text5 = make_text(df[df['TTC PÓS'] > df['TTC PRÉ']], 'text4', font_size, tick_offset + font_size * 4, x, y, 'red')
     
-    return alt.layer(chart, *text, tick)
+    return alt.layer(chart, *texts, tick)
 
 if check_for_new_file('data/repasse/graficos.xlsx', 'data/repasse/*.parquet'):
     read_excel_parquets('data/repasse/graficos.xlsx')

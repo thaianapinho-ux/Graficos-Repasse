@@ -74,7 +74,8 @@ def check_for_new_file(base_files: str, parquet_files: str) -> bool:
         return any([x > y for x in base_files_dates for y in parquet_files_dates])
     return True
 
-def read_excel_parquets(path):
+def read_excel_parquets(path: str) -> None:
+    '''Lê o Excel e Salva em parquets'''
     sheets = get_excel_sheet_names(path)
     print(sheets)
     for sheet in sheets:
