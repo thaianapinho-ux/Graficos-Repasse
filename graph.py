@@ -125,22 +125,22 @@ def make_graph_repasse(df: pd.DataFrame, h_chart, w_chart, h_pic, w_pic, canal):
     
     return alt.layer(chart, *texts, tick)
 
-# if check_for_new_file('data/repasse/graficos.xlsx', 'data/repasse/*.parquet'):   
-#     read_excel_parquets('data/repasse/graficos.xlsx')
-#     depara_repasse = pl.read_parquet('data/repasse/depara_repasse.parquet').to_pandas()
-#     depara_repasse['Caminho'] = depara_repasse['Caminho'].apply(convert_image)
-#     depara_repasse.to_parquet('data/repasse/depara_repasse.parquet')
+if check_for_new_file('data/repasse/graficos.xlsx', 'data/repasse/*.parquet'):   
+    read_excel_parquets('data/repasse/graficos.xlsx')
+    depara_repasse = pl.read_parquet('data/repasse/depara_repasse.parquet').to_pandas()
+    depara_repasse['Caminho'] = depara_repasse['Caminho'].apply(convert_image)
+    depara_repasse.to_parquet('data/repasse/depara_repasse.parquet')
 
 repasse = pl.read_parquet('data/repasse/repasse.parquet')
 
-depara_repasse = pl.read_parquet('data/repasse/depara_repasse2.parquet')
+depara_repasse = pl.read_parquet('data/repasse/depara_repasse.parquet')
 
 repasse = repasse.join(depara_repasse, left_on='SKU', right_on = 'SKU')
 
 repasse.columns = [x.lower() for x in repasse.columns]
 
 st.set_page_config(
-    page_title="PINC NAB - Jul/23", page_icon="📈", initial_sidebar_state="expanded", layout='wide'
+    page_title="PINC NAB - Out/23", page_icon="📈", initial_sidebar_state="expanded", layout='wide'
 )
 
 reduce_header_height_style = """
@@ -150,7 +150,7 @@ reduce_header_height_style = """
 """
 st.markdown(reduce_header_height_style, unsafe_allow_html=True)
 
-st.header('Resumo Repasse - Jul/23')
+st.header('Resumo Repasse - Out/23')
 
 col1, col2, col3, col4, col5 = st.columns(5)
 
@@ -209,5 +209,3 @@ with tab2:
                      'ATACADO': st.column_config.NumberColumn('Atacado', format='R$ %2f', ),
                      },
                  use_container_width=True, height=2000)
-
-
