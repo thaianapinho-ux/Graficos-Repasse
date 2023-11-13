@@ -6,6 +6,8 @@ frames = []
 
 url = 'https://www.catalogoambev.com.br/site'
 
+
+
 r = requests.get(url)
 
 soup = BeautifulSoup(r.content,'html.parser')
