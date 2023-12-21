@@ -142,11 +142,11 @@ def make_graph_repasse(df: pd.DataFrame, h_chart, w_chart, h_pic, w_pic, canal):
     
     return alt.layer(chart, *texts, tick)
 
-# if check_for_new_file('data/cerveja/graficos_cerveja.xlsx', 'data/cerveja/*.parquet'):   
-#     read_excel_parquets('data/cerveja/graficos_cerveja.xlsx', 'data/cerveja')
-#     depara_repasse = pl.read_parquet('data/cerveja/depara_repasse.parquet').to_pandas()
-#     depara_repasse['Caminho'] = depara_repasse['Caminho'].apply(convert_image)
-#     depara_repasse.to_parquet('data/cerveja/depara_repasse.parquet')
+if check_for_new_file('data/cerveja/graficos_cerveja.xlsx', 'data/cerveja/*.parquet'):   
+    read_excel_parquets('data/cerveja/graficos_cerveja.xlsx', 'data/cerveja')
+    depara_repasse = pl.read_parquet('data/cerveja/depara_repasse.parquet').to_pandas()
+    depara_repasse['Caminho'] = depara_repasse['Caminho'].apply(convert_image)
+    depara_repasse.to_parquet('data/cerveja/depara_repasse.parquet')
 
 repasse = pl.read_parquet('data/cerveja/cerveja.parquet')   
 
@@ -184,16 +184,13 @@ canais = {
     
 repasse = repasse.filter((pl.col('comercial') == st.session_state['comercial']) & (pl.col('operação') == st.session_state['operacao']))
 #repasse = repasse.filter(pl.col('grupo').is_in(grupo_dict.get(grupo_select)))
+grupos = sorted(repasse.select('grupo').unique().to_series().to_list())
 repasse = repasse.select(comum + canais.get('BAR')).to_pandas()
 
 graphs = [
     make_graph_repasse(repasse[repasse['grupo'] == grupo], 250, 1600, 120, 75, 'BAR') 
-    for grupo in """OW 269
-OW 350
-OW LN
-RGB 600
-RGB 1L
-""".splitlines()]
+    for grupo in grupos if grupo != 'NENHUM']
+
 
 graph = alt.vconcat(*graphs).properties(title = alt.Title(f'{st.session_state["comercial"].upper()} - {st.session_state["operacao"].upper()}', fontSize=30, fontWeight='bold'))
 
