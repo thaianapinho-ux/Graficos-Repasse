@@ -74,15 +74,14 @@ def check_for_new_file(base_files: str, parquet_files: str) -> bool:
         return any([x > y for x in base_files_dates for y in parquet_files_dates])
     return True
 
-def read_excel_parquets(path: str) -> None:
+def read_excel_parquets(path: str, destino: str) -> None:
     '''Lê o Excel e Salva em parquets'''
     sheets = get_excel_sheet_names(path)
-    print(sheets)
     for sheet in sheets:
-        if sheet != 'repasse_ac':
+        if sheet in ['cerveja', 'depara_repasse']:
             p = pd.read_excel(path, sheet_name=sheet)
             p.replace('-', '0.0')
-            p.to_parquet(f'data/repasse/{sheet}.parquet')
+            p.to_parquet(f'{destino}/{sheet}.parquet')
 
 def fazer_acao(nome_ação, n_acao, cestas, clientes, produtos, bases_foco, depara_acoes):
     

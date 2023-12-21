@@ -181,9 +181,9 @@ repasse = repasse.select(comum + canais.get(st.session_state['canal'])).to_panda
 
 graphs = [
     make_graph_repasse(repasse[repasse['grupo'] == grupo], 250, 1600, 120, 75, canal) 
-    for grupo in grupo_dict.get(grupo_select)]
+    for grupo in ['Single', 'Premium', 'Multi1', 'Multi2']]#grupo_dict.get(grupo_select)]
 
-graph = alt.vconcat(*graphs)
+graph = alt.vconcat(*graphs).properties(title = alt.Title('Repasse Nov/23', fontSize=30, fontWeight='bold'))
 
 st.altair_chart(graph)
 
