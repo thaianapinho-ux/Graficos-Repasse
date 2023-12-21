@@ -188,7 +188,7 @@ RGB 600
 RGB 1L
 """.splitlines()]
 
-graph = alt.vconcat(*graphs).properties(title = alt.Title(f'{st.session_state["comercial"].title()}', fontSize=30, fontWeight='bold'))
+graph = alt.vconcat(*graphs).properties(title = alt.Title(f'{st.session_state["comercial"].upper()} - {st.session_state["operacao"].upper()}', fontSize=30, fontWeight='bold'))
 
 st.altair_chart(graph)
 
