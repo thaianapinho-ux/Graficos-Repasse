@@ -18,6 +18,13 @@ st.set_page_config(
     page_title="PINC Cerveja - Jan/24", page_icon="🍺", initial_sidebar_state="expanded", layout='wide'
 )
 
+reduce_header_height_style = """
+    <style>
+        div.block-container {padding-top:1rem;}
+    </style>
+"""
+st.markdown(reduce_header_height_style, unsafe_allow_html=True)
+
 def convert_image(string: str) -> str:
     image = PILImage.open(string)
     output = io.BytesIO()    
