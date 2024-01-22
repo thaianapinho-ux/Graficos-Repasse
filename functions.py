@@ -78,7 +78,7 @@ def read_excel_parquets(path: str, destino: str) -> None:
     '''Lê o Excel e Salva em parquets'''
     sheets = get_excel_sheet_names(path)
     for sheet in sheets:
-        if sheet in ['cerveja', 'depara_repasse']:
+        if sheet in ['repasse','ceveja', 'depara_repasse']:
             p = pd.read_excel(path, sheet_name=sheet)
             p.replace('-', '0.0')
             p.to_parquet(f'{destino}/{sheet}.parquet')
