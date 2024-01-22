@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=C:\Python2\WPy64-31050\Projetos\NAB\Graficos Repasse\venv
+set VIRTUAL_ENV=C:\Users\99810903\OneDrive - Anheuser-Busch InBev\Desktop\Projetos\NAB\Graficos Repasse\venv
 
 if not defined PROMPT set PROMPT=$P$G
 
