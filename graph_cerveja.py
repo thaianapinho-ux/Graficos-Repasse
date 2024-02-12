@@ -142,11 +142,11 @@ def make_graph_repasse(df: pd.DataFrame, h_chart, w_chart, h_pic, w_pic, canal):
     
     return alt.layer(chart, *texts, tick)
 
-#if check_for_new_file('data/cerveja/graficos_cerveja.xlsx', 'data/cerveja/*.parquet'):   
-#    read_excel_parquets('data/cerveja/graficos_cerveja.xlsx', 'data/cerveja')
-#    depara_repasse = pl.read_parquet('data/cerveja/depara_repasse.parquet').to_pandas()
-#    depara_repasse['Caminho'] = depara_repasse['Caminho'].apply(convert_image)
-#    depara_repasse.to_parquet('data/cerveja/depara_repasse.parquet')
+# if check_for_new_file('data/cerveja/graficos_cerveja.xlsx', 'data/cerveja/*.parquet'):   
+#     read_excel_parquets('data/cerveja/graficos_cerveja.xlsx', 'data/cerveja')
+#     depara_repasse = pl.read_parquet('data/cerveja/depara_repasse.parquet').to_pandas()
+#     depara_repasse['Caminho'] = depara_repasse['Caminho'].apply(convert_image)
+#     depara_repasse.to_parquet('data/cerveja/depara_repasse.parquet')
 
 repasse = pl.read_parquet('data/cerveja/cerveja.parquet')   
 
@@ -158,7 +158,7 @@ depara_repasse.columns = [x.lower() for x in depara_repasse.columns]
 
 repasse = repasse.join(depara_repasse, left_on='sku', right_on = 'sku', suffix='_depara')
 
-st.header('Resumo Repasse Cerveja - Jan/24')
+st.header('Resumo Repasse Cerveja - Mar/24')
 
 col1, col2, col3, col4, col5 = st.columns(5)
 
