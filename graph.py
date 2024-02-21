@@ -140,7 +140,7 @@ repasse = repasse.join(depara_repasse, left_on='SKU', right_on = 'SKU')
 repasse.columns = [x.lower() for x in repasse.columns]
 
 st.set_page_config(
-    page_title="PINC NAB - DEZ/23", page_icon="📈", initial_sidebar_state="expanded", layout='wide'
+    page_title="PINC NAB - Mar/24", page_icon="📈", initial_sidebar_state="expanded", layout='wide'
 )
 
 reduce_header_height_style = """
