@@ -138,8 +138,10 @@ repasse = repasse.join(depara_repasse, left_on='SKU', right_on = 'SKU')
 
 repasse.columns = [x.lower() for x in repasse.columns]
 
+title = 'Abr/24'
+
 st.set_page_config(
-    page_title="PINC NAB - Mar/24", page_icon="📈", initial_sidebar_state="expanded", layout='wide'
+    page_title=f"PINC NAB - {title}", page_icon="📈", initial_sidebar_state="expanded", layout='wide'
 )
 
 reduce_header_height_style = """
@@ -149,7 +151,7 @@ reduce_header_height_style = """
 """
 st.markdown(reduce_header_height_style, unsafe_allow_html=True)
 
-st.header('Resumo Repasse - Dez/23')
+st.header(f'Resumo Repasse - {title}')
 
 col1, col2, col3, col4, col5 = st.columns(5)
 
