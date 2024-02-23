@@ -51,14 +51,14 @@ def make_text(df, texto: str, fonte, offset, x, y, color_param = 'black', f_weig
 def make_graph_repasse(df: pd.DataFrame, h_chart, w_chart, h_pic, w_pic, canal):
     match canal:
         case 'BAR':
-            y = 'rota-ttv pos'
+            y = 'rota-ttc pos'
             df['line1'] = df['nome_slide']
             df['line2'] = 'TTV Pré: R$ ' + df['rota-ttv pre'].round(2).map('{:,.2f}'.format).astype(str)
             df['line3'] = 'TTV Pós: R$ ' + df['rota-ttv pos'].round(2).map('{:,.2f}'.format).astype(str)
             df['line_delta'] = 'Delta TTV: R$ ' + df['rota-delta ttv'].round(2).map('{:,.2f}'.format).astype(str)
             df['line4'] = 'TTC Pós: R$ ' + df['rota-ttc pos'].round(2).map('{:,.2f}'.format).astype(str)
         case 'ASR':
-            y = 'asr-ttv pos'
+            y = 'asr-ttc pos'
             df['line1'] = df['nome_slide']
             df['line2'] = 'TTV Pré: R$ ' + df['asr-ttv pre'].round(2).map('{:,.2f}'.format).astype(str)
             df['line3'] = 'TTV Pós: R$ ' + df['asr-ttv pos'].round(2).map('{:,.2f}'.format).astype(str)
@@ -125,10 +125,10 @@ def make_graph_repasse(df: pd.DataFrame, h_chart, w_chart, h_pic, w_pic, canal):
     
     return alt.layer(chart, *texts, tick)
 
-# read_excel_parquets('data/repasse/graficos.xlsx', 'data/repasse')
-# depara_repasse = pl.read_parquet('data/repasse/depara_repasse.parquet').to_pandas()
-# depara_repasse['Caminho'] = depara_repasse['Caminho'].apply(convert_image)
-# depara_repasse.to_parquet('data/repasse/depara_repasse.parquet')
+read_excel_parquets('data/repasse/graficos.xlsx', 'data/repasse')
+depara_repasse = pl.read_parquet('data/repasse/depara_repasse.parquet').to_pandas()
+depara_repasse['Caminho'] = depara_repasse['Caminho'].apply(convert_image)
+depara_repasse.to_parquet('data/repasse/depara_repasse.parquet')
 
 repasse = pl.read_parquet('data/repasse/repasse.parquet')   
 
@@ -138,7 +138,7 @@ repasse = repasse.join(depara_repasse, left_on='SKU', right_on = 'SKU')
 
 repasse.columns = [x.lower() for x in repasse.columns]
 
-title = 'Abr/24'
+title = 'Mar/24'
 
 st.set_page_config(
     page_title=f"PINC NAB - {title}", page_icon="📈", initial_sidebar_state="expanded", layout='wide'
