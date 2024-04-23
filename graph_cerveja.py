@@ -142,10 +142,10 @@ def make_graph_repasse(df: pd.DataFrame, h_chart, w_chart, h_pic, w_pic, canal):
     
     return alt.layer(chart, *texts, tick)
 
-# read_excel_parquets('data/cerveja/graficos_cerveja.xlsx', 'data/cerveja')
-# depara_repasse = pl.read_parquet('data/cerveja/depara_repasse.parquet').to_pandas()
-# depara_repasse['Caminho'] = depara_repasse['Caminho'].apply(convert_image)
-# depara_repasse.to_parquet('data/cerveja/depara_repasse.parquet')
+read_excel_parquets('data/cerveja/graficos_cerveja.xlsx', 'data/cerveja')
+depara_repasse = pl.read_parquet('data/cerveja/depara_repasse.parquet').to_pandas()
+depara_repasse['Caminho'] = depara_repasse['Caminho'].apply(convert_image)
+depara_repasse.to_parquet('data/cerveja/depara_repasse.parquet')
 
 repasse = pl.read_parquet('data/cerveja/cerveja.parquet')   
 

@@ -70,21 +70,17 @@ def make_graph_repasse(df: pd.DataFrame, h_chart, w_chart, h_pic, w_pic, canal):
             df['line2'] = 'TTC Pré: R$ ' + df['varejo-ttc pre'].round(2).map('{:,.2f}'.format).astype(str)
             df['line3'] = 'TTC Pós: R$ ' + df['varejo-ttc pos'].round(2).map('{:,.2f}'.format).astype(str)
             df['line_delta'] = 'Delta TTC: R$ ' + df['varejo-delta ttc'].round(2).map('{:,.2f}'.format).astype(str)
-            df['line4'] = 'Promo'
-            df['line5'] = 'Pré: R$ ' + df['varejo-promo pre'].astype(str) + ' | ' + df['varejo-%promo pre'].map('{:,.1%}'.format).astype(str)
-            df['line6'] = 'Pós: R$ ' + df['varejo-promo pos'].astype(str) + ' | ' + df['varejo-%promo pos'].map('{:,.1%}'.format).astype(str)
+            
         case 'ATACADO':
             y = 'atacado-ttc pos'
             df['line1'] = df['nome_slide']
             df['line2'] = 'TTC Pré: R$ ' + df['atacado-ttc pre'].round(2).map('{:,.2f}'.format).astype(str)
-            df['line3'] = 'Desin Pré: R$ ' + df['atacado-desin pre'].round(2).map('{:,.2f}'.format).astype(str)
             df['line4'] = 'TTC Pós: R$ ' + df['atacado-ttc pos'].round(2).map('{:,.2f}'.format).astype(str)
-            df['line5'] = 'Desin Pós: R$ ' + df['atacado-desin pos'].round(2).map('{:,.2f}'.format).astype(str)
             df['line_delta'] = 'Delta TTC: R$ ' + df['atacado-delta ttc'].round(2).map('{:,.2f}'.format).astype(str)
         case _:
             y = 'a'
     
-    df['nome_sorted'] = df[y].round(2).astype(str).str.replace('10','zzz').str.replace('.','') + df['nome_slide']
+    df['nome_sorted'] = df[y].round(2).astype(str).str.replace('10','zzy').str.replace('11','zzz').str.replace('.','') + df['nome_slide']
     
     y_min = df[y].min()
     y_max = df[y].max()
@@ -138,7 +134,7 @@ repasse = repasse.join(depara_repasse, left_on='SKU', right_on = 'SKU')
 
 repasse.columns = [x.lower() for x in repasse.columns]
 
-title = 'Mar/24'
+title = 'Mai/24'
 
 st.set_page_config(
     page_title=f"PINC NAB - {title}", page_icon="📈", initial_sidebar_state="expanded", layout='wide'
@@ -170,8 +166,8 @@ comum = ['uf', 'geo', 'emb.', 'sku', 'qtd cx', 'nome_slide', 'grupo', 'nome', 'm
 canais = {
     'BAR': ['rota-ttv pre', 'rota-ttv pos', 'rota-delta ttv', 'rota-ttc pos'],
     'ASR': ['asr-ttv pre', 'asr-ttv pos', 'asr-delta ttv', 'asr-ttc pos'],
-    'VAREJO': ['varejo-ttc pre', 'varejo-promo pre', 'varejo-%promo pre', 'varejo-ttc pos', 'varejo-promo pos', 'varejo-%promo pos', 'varejo-delta ttc'],
-    'ATACADO': ['atacado-ttc pre', 'atacado-desin pre', 'atacado-ttc pos', 'atacado-desin pos', 'atacado-delta ttc'],
+    'VAREJO': ['varejo-ttc pre', 'varejo-ttc pos', 'varejo-delta ttc'],
+    'ATACADO': ['atacado-ttc pre', 'atacado-ttc pos', 'atacado-delta ttc'],
 }
 
 resumo_canais = repasse.clone()
