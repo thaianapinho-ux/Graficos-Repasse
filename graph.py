@@ -134,7 +134,7 @@ repasse = repasse.join(depara_repasse, left_on='SKU', right_on = 'SKU')
 
 repasse.columns = [x.lower() for x in repasse.columns]
 
-title = 'Ago/24'
+title = 'Nov/24'
 
 st.set_page_config(
     page_title=f"PINC NAB - {title}", page_icon="📈", initial_sidebar_state="expanded", layout='wide'
